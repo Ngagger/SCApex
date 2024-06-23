@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
+
     <Frame type="Frame" name="GameUI/UIContainer/ConsoleUIContainer" file="GameUI">
+
         <Frame type="ControlGroupPanel" name="ControlGroupPanel">
             <Anchor side="Left" relative="$this" pos="Max" offset="0"/>
             <Anchor relative="$parent" side="Bottom" pos="Max" offset="-270"/>
             <Anchor relative="$parent" side="Right" pos="Max" offset="-20"/>
             <Width val="755"/>
             
+            <Frame type="BlurFrame" name="ApexBlurThis">
+                <Blur val="true"/>
+                <BlurAmount val="0.45"/>
+                <Unclipped val="true"/>
+                <RenderType val="HDR"/>
+                <Alpha val="255"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            </Frame>
+        
+
             <Frame name="backgroundGrey" type="Image">
                 <RenderPriority val="0"/>
                 <Anchor side="Left" relative="$parent" pos="Min" offset="-100"/>

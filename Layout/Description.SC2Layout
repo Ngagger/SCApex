@@ -7,6 +7,17 @@
             <Height val="400"/>
             <Width val="749"/>
             <Visible val="false"/>
+            <Frame type="BlurFrame" name="ApexBlurThis">
+                <Blur val="true"/>
+                <BlurAmount val="0.45"/>
+                <Unclipped val="true"/>
+                <RenderType val="HDR"/>
+                <Alpha val="255"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            </Frame>
             <Frame name="background" type="Image">
                 <IgnoreParentAlpha val="true"/>
                 <RenderPriority val="2"/>

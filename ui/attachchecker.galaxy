@@ -85,9 +85,6 @@ static void ApplyAttachpoints(int p,string attachment, int idx, string tc) {
     ug = UnitGroupFilterPlayer(ug, p, -1);
     u = UnitGroupUnit(ug,1);
 
-    
-    LibapxPrint(PlayerGroupAll(), attachment);
-
     ActorSendTo(libNtve_gf_MainActorofUnit(u), DefaultAttachPoint, " AttachModelOffset Beacon_Nova {} {"+attachment + "}");
     ActorSendTo(libNtve_gf_MainActorofUnit(u), "::Main", "ModelSwap EditorHelper");
     ActorSendTo(libNtve_gf_MainActorofUnit(u), "::Main", "SetTeamColor {"+tc+"} {"+tc+"}");

@@ -32,7 +32,7 @@ const string gv_LibapxUiShining = "CreditsLabel";
 
 // generic icons
 const string gv_LibapxUiIconSearch = "Assets\\Textures\\ui-editoricon-toolbar_find.dds";
-const string gv_LibapxUiIconGo = "Assets\\Textures\\ui-editoricon-dataTypes_movers.dds";
+const string gv_LibapxUiIconGo = "Assets\\Textures\\ui-editoricon-data_types_movers.dds";
 const string gv_LibapxUiIconReset = "Assets\\Textures\\ui-editoricon-general_undo.dds";
 const string gv_LibapxUiIconX = "Assets\\Textures\\ui-editoricon-previewer_delete.dds";
 const string gv_LibapxUiIconPlus = "EditorData\\Images\\DataAdd.tga";
