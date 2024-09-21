@@ -2693,19 +2693,8 @@ void LibapxDefineCopy(string commandName) {
 // creates an effect at target units or at a point
 void LibapxCommandEffect(int user, unitgroup u, string argv, int spawningCount, string bracketText) {
     unitgroup g = u;
-	unitgroup h = DataTableGetUnitGroup(true,"unitvar_Hover_" + IntToString(user));
-
     string effect = StringWord( argv, 2 );
     bool usingCursor;
-	bool usingCoords;
-	bool usingAcquired;
-	bool usingHover;
-	bool usingContext;
-
-	unit target = libNtve_gf_AcquiredTarget();
-	unit hover = UnitGroupUnit(h,1);
-	unit group = UnitGroupUnit(DataTableGetUnitGroup(true, "unitvar_" + StringWord(argv,4)),1);
-	
 
     effect = LibapxCatalogGet(c_gameCatalogEffect, effect);
     if(effect == null) {
@@ -2715,102 +2704,6 @@ void LibapxCommandEffect(int user, unitgroup u, string argv, int spawningCount, 
     if(StringFind(argv, "-point" ,c_stringNoCase) != -1 ) {
         argv =  StringReplaceWord(argv, "-point", "", 1, c_stringNoCase);
         usingCursor = true;
-    }
-	if(StringFind(argv, "-acquired" ,c_stringNoCase) != -1 ) {
-        argv =  StringReplaceWord(argv, "-acquired", "", 1, c_stringNoCase);
-        usingAcquired = true;
-    }
-	if(StringFind(argv, "-coord" ,c_stringNoCase) != -1 ) {
-        argv =  StringReplaceWord(argv, "-coord", "", 1, c_stringNoCase);
-        usingCoords = true;
-    }
-	if(StringFind(argv, "-hover" ,c_stringNoCase) != -1 ) {
-        argv =  StringReplaceWord(argv, "-hover", "", 1, c_stringNoCase);
-        usingHover = true;
-    }
-	if(StringFind(argv, "-context" ,c_stringNoCase) != -1 ) {
-        argv =  StringReplaceWord(argv, "-context", "", 1, c_stringNoCase);
-        usingContext = true;
-    }
-	
-    if(usingContext == true){
-        if( UnitGroupCount(g, c_unitCountAll) != 0 ) {
-            UnitGroupLoopBegin(g);
-            while(!UnitGroupLoopDone()) {
-                if( libNtve_gf_UnitCanCreateEffectOnUnit(UnitGroupLoopCurrent(), effect, group) ) {
-                    UnitCreateEffectUnit(UnitGroupLoopCurrent(), effect, group);
-                }
-                else {
-                    LibapxPrintError(user, "<c val=\"ff0000\">Unable to create the effect.</c>");
-                }
-                UnitGroupLoopStep();
-            }
-            UnitGroupLoopEnd();
-        }
-    }
-
-    if(usingHover == true){
-        if( UnitGroupCount(g, c_unitCountAll) != 0 ) {
-            UnitGroupLoopBegin(g);
-            while(!UnitGroupLoopDone()) {
-                if( libNtve_gf_UnitCanCreateEffectOnUnit(UnitGroupLoopCurrent(), effect, hover) ) {
-                    UnitCreateEffectUnit(UnitGroupLoopCurrent(), effect, hover);
-                }
-                else {
-                    LibapxPrintError(user, "<c val=\"ff0000\">Unable to create the effect.</c>");
-                }
-                UnitGroupLoopStep();
-            }
-            UnitGroupLoopEnd();
-        }
-    }
-
-	if(usingCoords){
-        if( UnitGroupCount(g, c_unitCountAll) != 0 ) {
-            UnitGroupLoopBegin(g);
-            while(!UnitGroupLoopDone()) {
-                if( libNtve_gf_PlayerCanCreateEffectAtPoint(user, effect, Point(StringToFixed(StringWord(argv, 3)), StringToFixed(StringWord(argv, 4)))) ) {
-                    UnitCreateEffectPoint(UnitGroupLoopCurrent(), effect, Point(StringToFixed(StringWord(argv, 3)), StringToFixed(StringWord(argv, 4))));
-                }
-                else {
-                    LibapxPrintError(user, "<c val=\"ff0000\">Unable to create the effect.</c>");
-                }
-                UnitGroupLoopStep();
-            }
-            UnitGroupLoopEnd();
-        }
-    }
-
-		if(usingAcquired == true){
-        if( UnitGroupCount(g, c_unitCountAll) != 0 ) {
-            UnitGroupLoopBegin(g);
-            while(!UnitGroupLoopDone()) {
-                if( libNtve_gf_UnitCanCreateEffectOnUnit(UnitGroupLoopCurrent(), effect, libNtve_gf_AcquiredTarget()) ) {
-                    UnitCreateEffectUnit(UnitGroupLoopCurrent(), effect, libNtve_gf_AcquiredTarget());
-                }
-                else {
-                    LibapxPrintError(user, "<c val=\"ff0000\">Unable to create the effect.</c>");
-                }
-                UnitGroupLoopStep();
-            }
-            UnitGroupLoopEnd();
-        }
-    }
-
-	if(usingAcquired == true){
-        if( UnitGroupCount(g, c_unitCountAll) != 0 ) {
-            UnitGroupLoopBegin(g);
-            while(!UnitGroupLoopDone()) {
-                if( libNtve_gf_UnitCanCreateEffectOnUnit(UnitGroupLoopCurrent(), effect, libNtve_gf_AcquiredTarget()) ) {
-                    UnitCreateEffectUnit(UnitGroupLoopCurrent(), effect, libNtve_gf_AcquiredTarget());
-                }
-                else {
-                    LibapxPrintError(user, "<c val=\"ff0000\">Unable to create the effect.</c>");
-                }
-                UnitGroupLoopStep();
-            }
-            UnitGroupLoopEnd();
-        }
     }
 
     if(usingCursor == true){
@@ -2830,7 +2723,7 @@ void LibapxCommandEffect(int user, unitgroup u, string argv, int spawningCount, 
         }
     }
 
-    if(usingCursor == false && usingAcquired == false && usingCoords == false && usingHover == false && usingContext == false){
+    if(usingCursor == false){
         if( UnitGroupCount(g, c_unitCountAll) != 0 ) {
             UnitGroupLoopBegin(g);
             while(!UnitGroupLoopDone()) {
@@ -2861,7 +2754,7 @@ void LibapxDefineEffect(string commandName) {
     LibapxCommandsGuideEntrySet(
         gv_CommandsGuideEntryUnit, 
         commandName, 
-        " This command creates an effect at a units position. <br> @effect [effectname] <br> Examples: <br> @effect MercenaryShield <br> @effect RavasaurLM -point <br> @effect RavasaurLM -coord 122.5 122.5 <br> @effect RavasaurLM -hover <br> @effect RavasaurLM -acquired <br> @unitvar MyContextGroup <br> @effect RavasaurLM -context MyContextGroup"
+        " This command creates an effect at a units position. <br> @effect [effectname] <br> Examples: <br> @effect MercenaryShield"
     );
 }
 
@@ -3108,84 +3001,5 @@ void LibapxDefineState(string commandName) {
 		gv_CommandsGuideEntryUnit, 
 		commandName, 
 		" This command sets a unit's state. You can find a list of states with just typing @state. Or refer to.. <br> States: fidget, highlightable, highlighted, ignoreterrainheight, invulnerable, hidden, paused, selectable, statusbar, targetable, tooltips, cursor, movable, turnable, usessupply <br> @state [state] [on/off] <br> Examples <br> @state fidget off <br> @state ignoreterrainheight on "
-	);
-}
-// LibapxCommandOrder
-// ====================
-// Sets one unitgroup to attack another unitgroup
-void LibapxCommandOrder(int user, unitgroup u, string argv, int spawningCount, string bracketText) {
-    string unitvar;
-    string unitgroupPrefix = "unitvar_";
-    unitgroup target;
-    unit targetUnit;
-    point targetPoint;
-    bool useTargetUnit;
-    bool useTargetPoint;
-    string abilityName = StringWord(argv, 2);
-    int abilityIndex;
-
-    if(StringWord(argv, 2) == "") {
-        LibapxPrintError(user, "Must provide ability name");
-        return;
-    }
-
-    if(StringWord(argv, 3) != "") {
-        abilityIndex = StringToInt(StringWord(argv, 3));
-    }
-    else {
-        abilityIndex = 0;
-    }
-
-
-    //Remove, and check for, modifiers
-    if( StringFind(argv, "-unit", c_stringNoCase) != -1 ) {
-        useTargetUnit = true;
-        argv = StringReplaceWord(argv, "-unit",  "", 1, c_stringNoCase);
-        unitvar = StringWord(argv, 4);
-
-    } 
-    
-    if( StringFind(argv, "-point", c_stringNoCase) != -1 ) {
-        useTargetPoint = true;
-        argv = StringReplaceWord(argv, "-point",  "", 1, c_stringNoCase);
-        if(StringWord(argv, 4) == "") {
-            targetPoint = gv_LibapxPlayer[user].mousePosition;
-        }
-        else {
-            targetPoint = Point(StringToFixed(StringWord(argv, 4)), StringToFixed(StringWord(argv, 5)));
-        }
-    } 
-    // @order move  1 -point 25 25  
-
-    if(useTargetUnit) {
-        target = DataTableGetUnitGroup(true, unitgroupPrefix + unitvar);
-        targetUnit = UnitGroupUnit(target, 1);
-
-        UnitGroupIssueOrder(
-            u, 
-            OrderTargetingUnit(AbilityCommand(abilityName, abilityIndex), targetUnit),
-            c_orderQueueReplace
-        );
-    }
-    else if(useTargetPoint) {
-        UnitGroupIssueOrder(
-            u,
-            OrderTargetingPoint(AbilityCommand(abilityName, abilityIndex), targetPoint),
-            c_orderQueueReplace
-        );
-    }
-    else {
-        UnitGroupIssueOrder(
-            u,
-            Order(AbilityCommand(abilityName, abilityIndex)),
-            c_orderQueueReplace
-        );
-    }   
-}
-void LibapxDefineOrder(string commandName) {
-	LibapxCommandsGuideEntrySet(
-		gv_CommandsGuideEntryUnit, 
-		commandName, 
-		"Issues an order to the unit. <br> Examples: <br>@order Blink 0 -point <br>@order Stimpack 0"
 	);
 }

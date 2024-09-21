@@ -147,7 +147,6 @@ void LibapxCommandsInitialize() {
 	LibapxChatCommandCreate("@weaponspeed", LibapxCommandWeaponspeed, LibapxDefineWeaponspeed);
 	LibapxChatCommandCreate("@weaponspeedall", LibapxCommandWeaponspeedall, LibapxDefineWeaponspeedall);
 	LibapxChatCommandCreate("@effect", LibapxCommandEffect, LibapxDefineEffect);
-	LibapxChatCommandCreate("@order", LibapxCommandOrder, LibapxDefineOrder);
 
 	// unit visual (actor) commands - done in cmd guide
 	LibapxChatCommandCreate("@setdelay", LibapxCommandSetdelay, LibapxDefineSetdelay);
@@ -188,9 +187,6 @@ void LibapxCommandsInitialize() {
 	LibapxChatCommandCreate(">keypress", LibapxCommandKeypress, LibapxDefineKeypress);
 	LibapxChatCommandCreate(">moveto", LibapxCommandMoveto, LibapxDefineMoveto);
 	LibapxChatCommandCreate(">condition", LibapxCommandCondition, LibapxDefineCondition);
-	LibapxChatCommandCreate(">set", LibapxCommandSet, LibapxDefineSet);
-	LibapxChatCommandCreate(">event", LibapxCommandEvents, LibapxDefineEvents);
-	LibapxChatCommandCreate(">sequence", LibapxCommandSequence, LibapxDefineSequence);
 
 
 	//seroCmds

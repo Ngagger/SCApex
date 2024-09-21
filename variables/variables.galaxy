@@ -20,24 +20,6 @@ void LibapxVariableFunctionInitialize() {
     ); 
     LibapxVariableFunctionCreate("Debug", LibapxVariableFunctionDebug);
 
-    LibapxCommandsGuideSetVariableFunctionEntry(
-        gv_LibapxVariableFunctionPrefix+"WorldHeight()", 
-        "Returns the world height where of selected unit's position (based on height type). <br> Example: ${Height(1)} <br> Ground(1), Air(2), Glide(3)"
-    ); 
-    LibapxVariableFunctionCreate("Height", LibapxVariableFunctionWorldHeight);
-
-    LibapxCommandsGuideSetVariableFunctionEntry(
-        gv_LibapxVariableFunctionPrefix+"UnitProp()", 
-        "Returns selected unit's unit property depending on the number given.  <br> Example:  <br> Returns current life: ${$UnitProp(3)}  <br> MovementSpeed(1) <br> Armor(2) <br> Life(3) <br> LifeRegen(4) <br> MaxLife(5) <br> Shields(6) <br> ShieldsArmor(7) <br> ShieldsRegen(8) <br> MaxShields(9) <br> Energy(10) <br> EnergyRegen(11) <br> MaxEnergy(12) <br> Height(13) <br> Kills(14) <br> KillsXp(15) <br> Level(16) <br> Speed(17) <br> CurrentSpeed(18) <br> Acceleration(19) <br> Turnrate(20) <br> Radius(21) <br> Experience(22) <br> LifePercent(23) <br> EnergyPercent (24) <br> ShieldsPercent (25)"
-    ); 
-    LibapxVariableFunctionCreate("UnitProp", LibapxVariableFunctionUnitAttribute);
-
-    LibapxCommandsGuideSetVariableFunctionEntry(
-        gv_LibapxVariableFunctionPrefix+"Player()", 
-        "Returns the owner's player number based on their slot in the game lobby. <br> Example:${$Player()}"
-    ); 
-    LibapxVariableFunctionCreate("Player", LibapxVariableFunctionUnitPlayerNumber);
-
 
     LibapxCommandsGuideSetVariableFunctionEntry(
         gv_LibapxVariableFunctionPrefix+"MouseX()", 

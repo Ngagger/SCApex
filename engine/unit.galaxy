@@ -109,40 +109,6 @@ void LibapxUnitSetVal(unit u, string valuename, string value) {
 	return;
 }
 
-const string gv_LibapxAllEvents = "attack attacked attackmove attackmoveFinish attackmoveCancel highlightOn highlightOff hold holdFinish holdCancel scanmove scanmoveComplete scanmoveCancel turn turnFinish turnCancel death move moveCancel moveFinish patrol patrolAllStages patrolCancel click select unselect acquire idle stop life shields energy kill exp height level movement";
-
-// LibapxUnitGetValEvent
-// ===========================
-// Gets a custom value stored to the unit from >event. Used for unit_events.galaxy
-string LibapxUnitGetValEvent(unit u, string valuename) {
-	string unitId;
-	string event;
-	unitId = FixedToString(UnitGetCustomValue(u, gv_LibapxUnitIndexId), 0);
-	event = unitId + "_" + valuename;
-	return DataTableGetString(true, event);
-
-}
-// LibapxUnitSetValEvent
-// ===========================
-// Gets a custom value stored to the unit. For >event
-void LibapxUnitSetValEvent(unit u, string valuename, string value) {
-	string unitId;
-	string event;
-	int i;
-	string comparison;
-	unitId = FixedToString(UnitGetCustomValue(u, gv_LibapxUnitIndexId), 0);
-	i = 1;
-	while(StringWord(gv_LibapxAllEvents, i) != "") {
-		comparison = StringWord(gv_LibapxAllEvents, i);
-		if(comparison == valuename) {
-			event =  unitId + "_" + comparison;
-		}
-		i+=1;
-	}
-	DataTableSetString(true, event, value);
-	return;
-}
-
 
 // LibapxUnitId
 // =====================

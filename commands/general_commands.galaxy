@@ -1029,7 +1029,7 @@ void LibapxCommandAlly(int user, unitgroup u, string argv, int spawningCount, st
 	if( original == "all" ) {
 		while( i != gv_LibapxMaxPlayers ) {
 			// Issue this command over the next color.
-			LibapxChatParse("_ally " + LibapxColorFromPlayer(i) + " " + targetPlayer, user, gv_LibapxPlayerParser[user][spawningCount].context, spawningCount);
+			LibapxChatParse("Ally " + LibapxColorFromPlayer(i) + " " + targetPlayer, user, gv_LibapxPlayerParser[user][spawningCount].context, spawningCount);
 			i += 1;
 		}
 		return;
@@ -1098,7 +1098,7 @@ void LibapxCommandUnally(int user, unitgroup u, string argv, int spawningCount, 
 	if( original == "all" ) {
 		while( i != gv_LibapxMaxPlayers ) {
 			// Issue this command over the next color.
-			LibapxChatParse("_unally " + LibapxColorFromPlayer(i) + " " + targetPlayer, user, gv_LibapxPlayerParser[user][spawningCount].context, spawningCount);
+			LibapxChatParse("Ally " + LibapxColorFromPlayer(i) + " " + targetPlayer, user, gv_LibapxPlayerParser[user][spawningCount].context, spawningCount);
 			i += 1;
 		}
 		return;
